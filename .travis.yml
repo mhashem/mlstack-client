@@ -1,13 +1,19 @@
 os:
   - linux
+
 services:
   - docker
+
 language: node_js
+
 node_js:
   - "8.11.1"
+
 jdk:
   - oraclejdk8
+
 sudo: false
+
 cache:
   directories:
     - node
@@ -19,6 +25,7 @@ env:
     - NODE_VERSION=8.11.1
     - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
     - SPRING_JPA_SHOW_SQL=false
+
 before_install:
   - jdk_switcher use oraclejdk8
   - java -version
@@ -27,6 +34,7 @@ before_install:
   # Repo for Yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
+
 install:
   - yarn install
 
@@ -37,10 +45,11 @@ script:
   - mvn package
   #- ./mvnw verify -Pprod -DskipTests
 
+
 notifications:
   email:
 	recipients:
-    	- mahmoudhashim.k@gmail.com
+      - mahmoudhashim.k@gmail.com
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: always     # default: false
