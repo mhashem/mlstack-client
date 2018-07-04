@@ -29,12 +29,14 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 install:
   - yarn install
+
 script:
   - chmod +x mvnw
   - ./mvnw clean test
   - yarn test
   - mvn package
   #- ./mvnw verify -Pprod -DskipTests
+
 notifications:
   email:
 	recipients:
