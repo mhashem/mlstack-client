@@ -5,6 +5,7 @@ import java.io.IOException;
 import co.rxstack.mlstack.client.ClientApp;
 import co.rxstack.mlstack.client.mlstack.impl.BackendService;
 import co.rxstack.mlstack.client.utils.ImageHelper;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class BackendServiceTest {
 	@Autowired
 	public BackendService backendService;
 
+	@Ignore
 	@Test
 	public void testUploadImage() throws IOException {
 		backendService.uploadImage("Foo",
