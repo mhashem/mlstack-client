@@ -23,13 +23,13 @@ public class ClientAppContext {
 	}
 
 	@Bean
-	public BackendService backendService(RestTemplate restTemplate, DiscoveryClient discoveryClient) {
-		return new BackendService(restTemplate, mlServiceName, discoveryClient);
+	public StorageService storageService() {
+		return new StorageService(imageStorageDirectory);
 	}
 
 	@Bean
-	public StorageService storageService() {
-		return new StorageService(imageStorageDirectory);
+	public BackendService backendService(RestTemplate restTemplate, DiscoveryClient discoveryClient) {
+		return new BackendService(restTemplate, mlServiceName, discoveryClient);
 	}
 
 }
