@@ -1,0 +1,131 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm" >
+			<h2 id="jhi-person-heading">Person</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+				<div class="form-row">
+					<div class="form-group" [hidden]="!person.id">
+						<label for="id">ID</label>
+						<input type="text" class="form-control" id="id" name="id"
+							   [(ngModel)]="person.id" readonly />
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<label class="form-control-label" for="field_name">Name</label>
+							<input type="text" class="form-control" name="name" id="field_name"
+								   [(ngModel)]="person.name"/>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="form-control-label" for="field_address">Address</label>
+							<input type="text" class="form-control" name="address" id="field_address"
+								   [(ngModel)]="person.address" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<label class="form-control-label" for="field_info">Info</label>
+							<input type="text" class="form-control" name="info" id="field_info"
+								   [(ngModel)]="person.info" />
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="form-control-label" for="field_dob">Dob</label>
+							<div class="input-group">
+								<input id="field_dob" type="text" class="form-control" name="dob" ngbDatepicker  #dobDp="ngbDatepicker" [(ngModel)]="person.dob"
+								/>
+								<span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group">
+							<label class="form-control-label">Image</label>
+							<!--<div>
+								<img [src]="'data:' + person.imageContentType + ';base64,' + person.image"
+									 style="max-height: 100px;" *ngIf="person.image" alt="person image"/>
+								<div *ngIf="person.image" class="form-text text-danger clearfix">
+									<span
+										class="pull-left">{{person.imageContentType}}, {{byteSize(person.image)}}</span>
+									<button type="button"
+											(click)="clearInputImage('image', 'imageContentType', 'fileImage')"
+											class="btn btn-secondary btn-xs pull-right">
+										<fa-icon [icon]="'times'"></fa-icon>
+									</button>
+								</div>
+								<input type="file" id="file_image" (change)="setFileData($event, person, 'image', true)"
+									   accept="image/*"/>
+							</div>
+							<input type="hidden" class="form-control" name="image" id="field_image"
+								   [(ngModel)]="person.image"/>
+							<input type="hidden" class="form-control" name="imageContentType"
+								   id="field_imageContentType"
+								   [(ngModel)]="person.imageContentType"/>-->
+
+
+							<div class="card" style="width: 18rem;">
+								<video class="card-img-top videoElement" #video id="video" autoplay></video>
+								<div class="card-body">
+									<button id="snap" (click)="capture()" class="btn btn-primary" type="button">
+										<fa-icon [icon]="'camera'"></fa-icon>&nbsp;<span>Capture</span></button>
+								</div>
+							</div>
+							<canvas #canvas id="canvas" width="640" height="480" hidden></canvas>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="form-control-label">Captures</label>
+							<div class="card">
+								<div class="card-body">
+									<img *ngFor="let c of captures" src="{{ c }}" style="width: 25%; height: 20%" class="img-thumbnail m-sm-1">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group" [hidden]="!_person.faceId1">
+                    <label class="form-control-label" for="field_faceId1">Face Id 1</label>
+                    <input type="text" class="form-control" name="faceId1" id="field_faceId1"
+                        [(ngModel)]="person.faceId1" />
+                </div>
+                <div class="form-group" [hidden]="!_person.faceId2">
+                    <label class="form-control-label" for="field_faceId2">Face Id 2</label>
+                    <input type="text" class="form-control" name="faceId2" id="field_faceId2"
+                        [(ngModel)]="person.faceId2" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_owner">Owner</label>
+                    <input type="text" class="form-control" name="owner" id="field_owner"
+                        [(ngModel)]="person.owner" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
