@@ -1,7 +1,8 @@
-# client
+# MLStack-Client
 This application was generated using JHipster 5.0.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.0.1](https://www.jhipster.tech/documentation-archive/v5.0.1).
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.com/mhashem/mlstack-client.svg?branch=master)](https://travis-ci.com/mhashem/eureka-registry)
 
 ## Development
 
