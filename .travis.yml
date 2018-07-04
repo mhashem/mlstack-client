@@ -37,6 +37,8 @@ script:
   #- ./mvnw verify -Pprod -DskipTests
 notifications:
   email:
+	recipients:
+    	- mahmoudhashim.k@gmail.com
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: always     # default: false
