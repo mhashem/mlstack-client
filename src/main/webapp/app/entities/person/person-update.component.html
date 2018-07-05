@@ -82,7 +82,7 @@
 								<video class="card-img-top videoElement" #video id="video" autoplay></video>
 								<div class="card-body">
 									<button id="snap" (click)="capture()" class="btn btn-primary" type="button">
-										<fa-icon [icon]="'camera'"></fa-icon>&nbsp;<span>Capture</span></button>
+										<span>Capture</span></button>
 								</div>
 							</div>
 							<canvas #canvas id="canvas" width="640" height="480" hidden></canvas>
@@ -93,7 +93,9 @@
 							<label class="form-control-label">Captures</label>
 							<div class="card">
 								<div class="card-body">
-									<img *ngFor="let c of captures" src="{{ c }}" style="width: 25%; height: 20%" class="img-thumbnail m-sm-1">
+									<img *ngFor="let c of captures; index as i" src="{{ c }}"
+										 style="width: 25%; height: 20%" (dblclick)="clearImage(i)"
+										 class="img-thumbnail m-sm-1">
 								</div>
 							</div>
 						</div>

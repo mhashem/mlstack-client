@@ -89,6 +89,10 @@ export class PersonUpdateComponent implements OnInit {
         }
     }
 
+    clearImage(index): void {
+      this.captures.splice(index, 1);
+    }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<IPerson>>) {
         result.subscribe((res: HttpResponse<IPerson>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }

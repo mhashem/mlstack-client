@@ -70,7 +70,9 @@ public class BackendService implements IBackendService {
 			Optional<ServiceInstance> serviceInstanceOpt =
 				discoveryClient.getInstances(serviceName).stream().findFirst();
 			if (!serviceInstanceOpt.isPresent()) {
-				log.warn("No service instance of type [{}] found [UP] at cluster!", serviceName);
+				// todo queue request for example
+				log.error("No service instance of type [{}] found [UP] at cluster!", serviceName);
+				return;
 			}
 
 			tempFile = File.createTempFile(cloudIndexIdentifier, ".jpg");
