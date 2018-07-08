@@ -1,4 +1,4 @@
-package co.rxstack.mlstack.client.mlstack.impl;
+package co.rxstack.mlstack.client.integrations.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

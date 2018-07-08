@@ -99,7 +99,12 @@ export class PersonUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
-        this.previousState();
+
+        if (this.captures.length > 0) {
+          this.captures.forEach(c => this.personService.uploadImage(this._person.id, c));
+        }
+
+        // this.previousState();
     }
 
     private onSaveError() {
@@ -112,4 +117,5 @@ export class PersonUpdateComponent implements OnInit {
     set person(person: IPerson) {
         this._person = person;
     }
+
 }

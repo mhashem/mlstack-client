@@ -1,13 +1,11 @@
-package co.rxstack.mlstack.client.mlstack.impl;
+package co.rxstack.mlstack.client.integrations.impl;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
-import co.rxstack.mlstack.client.mlstack.IBackendService;
-import co.rxstack.mlstack.client.mlstack.models.JobResponse;
-import co.rxstack.mlstack.client.mlstack.models.NotificationResponse;
+import co.rxstack.mlstack.client.integrations.IBackendService;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Files;

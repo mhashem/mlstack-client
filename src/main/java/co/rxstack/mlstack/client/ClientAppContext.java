@@ -1,7 +1,7 @@
 package co.rxstack.mlstack.client;
 
-import co.rxstack.mlstack.client.mlstack.impl.BackendService;
-import co.rxstack.mlstack.client.mlstack.impl.StorageService;
+import co.rxstack.mlstack.client.integrations.impl.BackendService;
+import co.rxstack.mlstack.client.integrations.impl.StorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;

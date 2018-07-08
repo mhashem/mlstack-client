@@ -3,8 +3,8 @@ package co.rxstack.mlstack.client.service;
 import java.util.concurrent.CompletableFuture;
 
 import co.rxstack.mlstack.client.domain.Person;
-import co.rxstack.mlstack.client.mlstack.impl.BackendService;
-import co.rxstack.mlstack.client.mlstack.impl.StorageService;
+import co.rxstack.mlstack.client.integrations.impl.BackendService;
+import co.rxstack.mlstack.client.integrations.impl.StorageService;
 import co.rxstack.mlstack.client.repository.PersonRepository;
 import co.rxstack.mlstack.client.security.SecurityUtils;
 import com.google.common.base.Preconditions;
