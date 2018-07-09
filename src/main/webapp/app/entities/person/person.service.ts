@@ -7,6 +7,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import {ML_SERVER_API_URL, SERVER_API_URL} from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IPerson } from 'app/shared/model/person.model';
+import {RequestOptions} from "http";
 
 type EntityResponseType = HttpResponse<IPerson>;
 type EntityArrayResponseType = HttpResponse<IPerson[]>;
@@ -54,8 +55,12 @@ export class PersonService {
       console.log(this.mlServerUrl);
       console.log(id);
       console.log(typeof image);
+
+      let formData = new FormData();
+      formData.append('faceImage', this.dataURItoBlob(image), '' + id);
+
       this.http.post<any>(`${this.mlServerUrl}/api/v1/faces/${id}/index`,
-        {'faceImage': this.dataURItoBlob(image)}).subscribe(c => {
+        formData, {}).subscribe(c => {
           console.log(c.status);
           console.log(c.body);
       });
