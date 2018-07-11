@@ -51,18 +51,18 @@ export class PersonService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
-    uploadImage(id: number, image: any): void /*Observable<HttpResponse<any>>*/ {
-      console.log(this.mlServerUrl);
-      console.log(id);
-      console.log(typeof image);
+    uploadImage(id: number, name: string, image: any): void /*Observable<HttpResponse<any>>*/ {
+      console.log(`server: ${this.mlServerUrl}, id: ${id}, name: ${name}, image type: ${typeof image}`);
 
       let formData = new FormData();
+      formData.append('personName', name);
       formData.append('faceImage', this.dataURItoBlob(image), '' + id);
+
+      console.log(`POST url: ${this.mlServerUrl}/api/v1/faces/${id}/index`);
 
       this.http.post<any>(`${this.mlServerUrl}/api/v1/faces/${id}/index`,
         formData, {}).subscribe(c => {
-          console.log(c.status);
-          console.log(c.body);
+          console.log(`type of ${typeof c}, response: ${c}`);
       });
     }
 

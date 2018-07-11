@@ -94,14 +94,14 @@ export class PersonUpdateComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IPerson>>) {
-        result.subscribe((res: HttpResponse<IPerson>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<IPerson>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(res) {
         this.isSaving = false;
 
         if (this.captures.length > 0) {
-          this.captures.forEach(c => this.personService.uploadImage(this._person.id, c));
+          this.captures.forEach(c => this.personService.uploadImage(res.body.id, res.body.name, c));
         }
 
         // this.previousState();
