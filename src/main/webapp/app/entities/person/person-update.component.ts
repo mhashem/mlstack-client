@@ -70,6 +70,10 @@ export class PersonUpdateComponent implements OnInit {
 
     setFileData(event, entity, field, isImage) {
         this.dataUtils.setFileData(event, entity, field, isImage);
+        console.log(event.target.files.length);
+        for (let i = 0; i < event.target.files.length; i++) {
+          this.captures.push(event.target.files[i]);
+        }
     }
 
     clearInputImage(field: string, fieldContentType: string, idInput: string) {

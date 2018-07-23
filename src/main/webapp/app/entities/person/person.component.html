@@ -20,8 +20,8 @@
             <th jhiSortBy="info"><span>Info</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dob"><span>Dob</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="faceId1"><span>Face Id 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="faceId2"><span>Face Id 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="faceId1"><span>Face Id 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="faceId2"><span>Face Id 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="owner"><span>Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -39,8 +39,8 @@
                     </a>
                     <span *ngIf="person.image">{{person.imageContentType}}, {{byteSize(person.image)}}</span>
                 </td>
-                <td>{{person.faceId1}}</td>
-                <td>{{person.faceId2}}</td>
+                <!--<td>{{person.faceId1}}</td>
+                <td>{{person.faceId2}}</td>-->
                 <td>{{person.owner}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

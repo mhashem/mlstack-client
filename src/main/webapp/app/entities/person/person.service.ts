@@ -56,7 +56,7 @@ export class PersonService {
 
       let formData = new FormData();
       formData.append('personName', name);
-      formData.append('faceImage', this.dataURItoBlob(image), '' + id);
+      formData.append('faceImage', image, '' + id);
 
       console.log(`POST url: ${this.mlServerUrl}/api/v1/faces/${id}/index`);
 
