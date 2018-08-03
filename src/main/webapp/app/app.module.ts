@@ -18,6 +18,7 @@ import { ClientAccountModule } from './account/account.module';
 import { ClientEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import {RecognitionModule} from "app/recognition/recognition.module";
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         ClientCoreModule,
         ClientHomeModule,
         ClientAccountModule,
-        ClientEntityModule
+        ClientEntityModule,
+        RecognitionModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

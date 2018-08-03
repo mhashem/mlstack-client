@@ -1,9 +1,17 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { recognitionState } from './recognition.route';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from "@angular/platform-browser";
+import {CommonModule} from "@angular/common";
+import {FaceModule} from "app/recognition/face/face.module";
 
 @NgModule({
-    imports: [RouterModule.forRoot(recognitionState, { useHash: true })],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [
+    CommonModule,
+    BrowserModule,
+    FaceModule
+  ],
+  entryComponents: [],
+  declarations: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ClientRecognitionModule {}
+export class RecognitionModule {
+}
