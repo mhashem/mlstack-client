@@ -1,3 +1,113 @@
-<p>
-  face works!
-</p>
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-sm-5">
+			<div class="card">
+				<div class="card-header">
+					Recognition
+					<button id="snap" (click)="capture()" class="float-right btn-sm btn btn-primary" type="button">
+						<span>Capture</span></button>
+				</div>
+
+				<video class="card-img-top videoElement" #video id="video" autoplay></video>
+				<canvas #canvas id="canvas" width="640" height="480" hidden></canvas>
+			</div>
+		</div>
+
+		<div class="col-sm-5">
+			<div class="card">
+				<div class="card-header">
+					Captured
+					<button id="reco" (click)="recognize()" class="float-right btn-sm btn btn-primary" type="button">
+						<span>Recognize</span></button>
+				</div>
+				<div class="card-body">
+					<img src="{{ selectedImage }}" class="img-thumbnail center-pill" />
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-2">
+			<div class="card">
+				<div class="card-header">
+					Queue
+				</div>
+					<ul class="list-group center-block" style="max-height: 350px; overflow-y: scroll">
+						<li *ngFor="let c of captures.slice().reverse(); index as i" class="list-group-item">
+							<img src="{{ c }}" class="img-thumbnail center-pill" alt="120x80"
+								 (dblclick)="clearImage(i)"
+								 data-holder-rendered="true" style="width: 120px; height: 80px;">
+						</li>
+					</ul>
+			</div>
+		</div>
+
+
+		<!--
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                             aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+        -->
+	</div>
+
+	<br />
+
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-header">
+					<h6 class="d-flex justify-content-between align-items-center">
+						<span class="text-muted">Tensorflow</span>
+						<span class="badge badge-secondary badge-pill badge-success">1</span>
+					</h6>
+				</div>
+				<div class="list-group list-group-flush">
+					<div class="list-group-item d-flex justify-content-between">
+						<div>
+							<span class="my-0">Mahmoud Hachem</span>
+						</div>
+						<span class="text-muted">71.1%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-header">
+					<h6 class="d-flex justify-content-between align-items-center">
+						<span class="text-muted">AWS</span>
+						<span class="badge badge-secondary badge-pill badge-success">2</span>
+					</h6>
+				</div>
+				<div class="list-group list-group-flush">
+					<div class="list-group-item d-flex justify-content-between">
+						<div>
+							<span class="my-0">Mahmoud Hachem</span>
+						</div>
+						<span class="text-muted">93.3%</span>
+					</div>
+					<div class="list-group-item d-flex justify-content-between">
+						<div>
+							<span class="my-0">Bill Gates</span>
+						</div>
+						<span class="text-muted">63.3%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-header">
+					<h6 class="d-flex justify-content-between align-items-center">
+						<span class="text-muted">Cognitive Services</span>
+						<span class="badge badge-secondary badge-pill badge-danger">0</span>
+					</h6>
+				</div>
+				<div class="list-group list-group-flush">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

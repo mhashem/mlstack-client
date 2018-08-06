@@ -57,7 +57,7 @@ export class PersonUpdateComponent implements OnInit {
 
     public capture(): void {
         const context = this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, 640, 480);
-        this.captures.push(this.canvas.nativeElement.toDataURL('image/png'));
+        this.captures.push(this.canvas.nativeElement.toDataURL('image/jpeg;base64;'));
     }
 
     byteSize(field) {
@@ -105,9 +105,9 @@ export class PersonUpdateComponent implements OnInit {
         this.isSaving = false;
 
         if (this.captures.length > 0) {
-          this.captures.forEach(c => this.personService.uploadImage(res.body.id, res.body.name, c));
+          this.captures.forEach(c =>
+            this.personService.uploadImage(res.body.id, res.body.name, this.dataURLtoBlob(c)));
         }
-
         // this.previousState();
     }
 
@@ -121,5 +121,15 @@ export class PersonUpdateComponent implements OnInit {
     set person(person: IPerson) {
         this._person = person;
     }
+
+    private dataURLtoBlob(dataurl): Blob {
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new Blob([u8arr], {type:mime});
+    }
+
 
 }
