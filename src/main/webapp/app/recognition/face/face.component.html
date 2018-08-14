@@ -4,9 +4,26 @@
 		<div class="col-sm-5">
 			<div class="card">
 				<div class="card-header">
-					Recognition
+					Source
+
+					<div class="float-right">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="cameraRadioBtn" name="imageSource" value="camera" class="custom-control-input" checked="checked">
+							<label class="custom-control-label" for="cameraRadioBtn">Camera</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="uploadRadioBtn" name="imageSource" value="file" class="custom-control-input">
+							<label class="custom-control-label" for="uploadRadioBtn">File</label>
+						</div>
+					</div>
+
 					<button id="snap" (click)="capture()" class="float-right btn-sm btn btn-primary" type="button">
 						<span>Capture</span></button>
+				</div>
+
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="customFile">
+					<label class="custom-file-label" for="customFile">Choose file</label>
 				</div>
 
 				<video class="card-img-top videoElement" #video id="video" autoplay></video>
@@ -17,7 +34,7 @@
 		<div class="col-sm-5">
 			<div class="card">
 				<div class="card-header">
-					Captured
+					Recognition
 					<button id="reco" (click)="recognize()" class="float-right btn-sm btn btn-primary" type="button">
 						<span>Recognize</span></button>
 				</div>
@@ -30,7 +47,7 @@
 		<div class="col-sm-2">
 			<div class="card">
 				<div class="card-header">
-					Queue
+					Captured
 				</div>
 					<ul class="list-group center-block" style="max-height: 350px; overflow-y: scroll">
 						<li *ngFor="let c of captures.slice().reverse(); index as i" class="list-group-item">

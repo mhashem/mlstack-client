@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 
-import {ML_SERVER_API_URL, SERVER_API_URL} from 'app/app.constants';
+import { ML_SERVER_API_URL, SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IPerson } from 'app/shared/model/person.model';
-import {RequestOptions} from "http";
+import { RequestOptions } from 'http';
 
 type EntityResponseType = HttpResponse<IPerson>;
 type EntityArrayResponseType = HttpResponse<IPerson[]>;
@@ -16,7 +16,7 @@ type EntityArrayResponseType = HttpResponse<IPerson[]>;
 export class PersonService {
     private resourceUrl = SERVER_API_URL + 'api/people';
 
-    private mlServerUrl = ML_SERVER_API_URL;
+    private mlServerUrl = 'http://' + ML_SERVER_API_URL;
 
     constructor(private http: HttpClient) {}
 
@@ -52,41 +52,47 @@ export class PersonService {
     }
 
     uploadImage(id: number, name: string, image: Blob): void /*Observable<HttpResponse<any>>*/ {
-      console.log(`server: ${this.mlServerUrl}, id: ${id}, name: ${name}, image type: ${typeof image}`);
+        console.log(`server: ${this.mlServerUrl}, id: ${id}, name: ${name}, image type: ${typeof image}`);
 
-      let formData = new FormData();
-      formData.append('personName', name);
-      formData.append('faceImage', image, id + '.jpg');
+        let formData = new FormData();
+        formData.append('personName', name);
+        formData.append('faceImage', image, id + '.jpg');
 
-      console.log(`POST url: ${this.mlServerUrl}/api/v1/faces/${id}/index`);
+        console.log(`POST url: ${this.mlServerUrl}/api/v1/faces/${id}/index`);
 
-      this.http.post<any>(`${this.mlServerUrl}/api/v1/faces/${id}/index`,
-        formData, {}).subscribe(c => {
-          console.log(`type of ${typeof c}, response: ${c}`);
-      });
+        this.http.post<any>(`${this.mlServerUrl}/api/v1/faces/${id}/index`, formData, {}).subscribe(c => {
+            console.log(`type of ${typeof c}, response: ${c}`);
+        });
     }
 
     dataURItoBlob(dataURI) {
-      // convert base64 to raw binary data held in a string
-      var byteString = atob(dataURI.split(',')[1]);
+        // convert base64 to raw binary data held in a string
+        var byteString = atob(dataURI.split(',')[1]);
 
-      // separate out the mime component
-      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        // separate out the mime component
+        var mimeString = dataURI
+            .split(',')[0]
+            .split(':')[1]
+            .split(';')[0];
 
-      // write the bytes of the string to an ArrayBuffer
-      var arrayBuffer = new ArrayBuffer(byteString.length);
-      var _ia = new Uint8Array(arrayBuffer);
-      for (var i = 0; i < byteString.length; i++) {
-        _ia[i] = byteString.charCodeAt(i);
-      }
+        // write the bytes of the string to an ArrayBuffer
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var _ia = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++) {
+            _ia[i] = byteString.charCodeAt(i);
+        }
 
-      var dataView = new DataView(arrayBuffer);
-      var blob = new Blob([dataView], { type: mimeString });
-      return blob;
+        var dataView = new DataView(arrayBuffer);
+        var blob = new Blob([dataView], { type: mimeString });
+        return blob;
     }
 
     typeOf(obj): any {
-      return {}.toString.call(obj).split(' ')[1].slice(0, -1).toLowerCase();
+        return {}.toString
+            .call(obj)
+            .split(' ')[1]
+            .slice(0, -1)
+            .toLowerCase();
     }
 
     private convertDateFromClient(person: IPerson): IPerson {
