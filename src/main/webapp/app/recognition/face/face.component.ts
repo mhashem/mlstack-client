@@ -76,7 +76,7 @@ export class FaceComponent implements OnInit {
     }
 
     initializeWebSocketConnection() {
-        let ws = new SockJS(this.mlServerUrl + '/socket');
+        let ws = new SockJS(this.mlServerUrl);
         this.stompClient = Stomp.over(ws);
         let that = this;
         this.stompClient.connect({}, function(frame) {

@@ -56,7 +56,7 @@ module.exports = (options) => ({
                 // If you use an API server, in `prod` mode, you will need to enable CORS
                 // (see the `jhipster.cors` common JHipster property in the `application-*.yml` configurations)
                 SERVER_API_URL: `''`,
-				ML_SERVER_API_URL: `'desktop-ge130ku:8082/mlstack'`
+				ML_SERVER_API_URL: `'localhost:8082/mlstack'`
             }
         }),
         new CopyWebpackPlugin([
