@@ -26,8 +26,8 @@
 					<label class="custom-file-label" for="customFile">Choose file</label>
 				</div>
 
-				<video class="card-img-top videoElement" #video id="video" autoplay></video>
-				<canvas #canvas id="canvas" width="640" height="480" hidden></canvas>
+				<video class="card-img-top videoElement" #video id="video" autoplay width="450" height="360"></video>
+				<canvas #canvas id="canvas" width="450" height="360" hidden></canvas>
 			</div>
 		</div>
 
@@ -71,60 +71,23 @@
 
 	<br />
 
-	<div class="row">
-		<div class="col-sm-3">
-			<div class="card">
-				<div class="card-header">
-					<h6 class="d-flex justify-content-between align-items-center">
-						<span class="text-muted">Tensorflow</span>
-						<span class="badge badge-secondary badge-pill badge-success">1</span>
-					</h6>
-				</div>
-				<div class="list-group list-group-flush">
-					<div class="list-group-item d-flex justify-content-between">
-						<div>
-							<span class="my-0">Mahmoud Hachem</span>
-						</div>
-						<span class="text-muted">71.1%</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div class="card">
-				<div class="card-header">
-					<h6 class="d-flex justify-content-between align-items-center">
-						<span class="text-muted">AWS</span>
-						<span class="badge badge-secondary badge-pill badge-success">2</span>
-					</h6>
-				</div>
-				<div class="list-group list-group-flush">
-					<div class="list-group-item d-flex justify-content-between">
-						<div>
-							<span class="my-0">Mahmoud Hachem</span>
-						</div>
-						<span class="text-muted">93.3%</span>
-					</div>
-					<div class="list-group-item d-flex justify-content-between">
-						<div>
-							<span class="my-0">Bill Gates</span>
-						</div>
-						<span class="text-muted">63.3%</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div class="card">
-				<div class="card-header">
-					<h6 class="d-flex justify-content-between align-items-center">
-						<span class="text-muted">Cognitive Services</span>
-						<span class="badge badge-secondary badge-pill badge-danger">0</span>
-					</h6>
-				</div>
-				<div class="list-group list-group-flush">
-				</div>
-			</div>
-		</div>
-	</div>
+	<table class="table">
+		<thead class="thead-dark">
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Label</th>
+			<th scope="col">Confidence</th>
+			<th scope="col">Recognizer</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let face of faces; index as i">
+			<th scope="row">{{ i + 1 }}</th>
+			<td>{{ face.label }}</td>
+			<td>{{ face.confidence | number:'2.1-2'}}%</td>
+			<td>{{ face.recognizer }}</td>
+		</tr>
+		</tbody>
+	</table>
+
 </div>

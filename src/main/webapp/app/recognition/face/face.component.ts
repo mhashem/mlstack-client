@@ -4,6 +4,7 @@ import { FaceService } from 'app/recognition/face/face.service';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { ML_SERVER_API_URL } from 'app/app.constants';
+import { Face } from 'app/recognition/face/face';
 
 @Component({
     selector: 'jhi-face',
@@ -19,11 +20,19 @@ export class FaceComponent implements OnInit {
 
     selectedImage: any;
 
+    subscriptionId = 315;
+
     @ViewChild('video') public video: ElementRef;
     @ViewChild('canvas') public canvas: ElementRef;
 
+    _this = this;
+
+    faces: Array<Face>;
+
     constructor(private faceService: FaceService) {
         this.captures = [];
+
+        this.faces = [];
 
         this.initializeWebSocketConnection();
     }
@@ -34,6 +43,7 @@ export class FaceComponent implements OnInit {
         this.video.nativeElement.pause();
         this.video.nativeElement.src = '';
         this.localStream.getTracks()[0].stop();
+        // this.stompClient.unsubscribe();
     }
 
     ngAfterViewInit(): void {
@@ -47,23 +57,40 @@ export class FaceComponent implements OnInit {
     }
 
     public capture(): void {
-        const context = this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, 640, 480);
+        const context = this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, 450, 360);
         const image = this.canvas.nativeElement.toDataURL('image/jpeg;base64;');
         this.captures.push(image);
         this.selectedImage = image;
     }
 
     public recognize(): void {
-        this.faceService.recognizeImage(this.dataURLtoBlob(this.selectedImage)).subscribe(faces => {
-            console.log(`type of ${typeof faces}, response: ${faces}`);
+        this.faces = [];
+        // todo add loading
+        this.faceService.recognizeImage(FaceComponent.dataURLtoBlob(this.selectedImage));
+    }
 
-            faces.forEach(face => {
-                console.log(face);
+    initializeWebSocketConnection() {
+        let self = this;
+        let ws = new SockJS(this.mlServerUrl);
+        this.stompClient = Stomp.over(ws);
+        this.stompClient.connect({}, function(frame) {
+            self.stompClient.subscribe('/recognitions', message => {
+                if (message.body) {
+                    const ff = JSON.parse(message.body);
+                    self.bindData(ff);
+                }
             });
         });
     }
 
-    private dataURLtoBlob(dataurl): Blob {
+    public bindData(fff): void {
+        console.log(fff);
+        fff.forEach(f => {
+            this.faces.push(f);
+        });
+    }
+
+    private static dataURLtoBlob(dataurl): Blob {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
             bstr = atob(arr[1]),
@@ -73,18 +100,5 @@ export class FaceComponent implements OnInit {
             u8arr[n] = bstr.charCodeAt(n);
         }
         return new Blob([u8arr], { type: mime });
-    }
-
-    initializeWebSocketConnection() {
-        let ws = new SockJS(this.mlServerUrl);
-        this.stompClient = Stomp.over(ws);
-        let that = this;
-        this.stompClient.connect({}, function(frame) {
-            that.stompClient.subscribe('/recognitions', message => {
-                if (message.body) {
-                    console.log(message.body);
-                }
-            });
-        });
     }
 }

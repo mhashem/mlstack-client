@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Face } from 'app/recognition/face/face';
 import { ML_SERVER_API_URL } from 'app/app.constants';
 
 @Injectable({
@@ -12,9 +10,11 @@ export class FaceService {
 
     constructor(private http: HttpClient) {}
 
-    recognizeImage(image: any): Observable<Face[]> {
+    recognizeImage(image: any): void {
         let formData = new FormData();
         formData.append('image', image, 'recognize-image.jpg');
-        return this.http.post<Face[]>(`${this.mlServerUrl}/api/v1/faces/recognition`, formData, {});
+        this.http.post(`${this.mlServerUrl}/api/v1/faces/recognition`, formData, {}).subscribe(value => {
+            console.log('Recognition called');
+        });
     }
 }
