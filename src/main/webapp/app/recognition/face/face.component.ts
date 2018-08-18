@@ -73,14 +73,21 @@ export class FaceComponent implements OnInit {
         let self = this;
         let ws = new SockJS(this.mlServerUrl);
         this.stompClient = Stomp.over(ws);
-        this.stompClient.connect({}, function(frame) {
-            self.stompClient.subscribe('/recognitions', message => {
-                if (message.body) {
-                    const ff = JSON.parse(message.body);
-                    self.bindData(ff);
-                }
-            });
-        });
+        this.stompClient.connect(
+            {},
+            function(frame) {
+                self.stompClient.subscribe('/recognitions', message => {
+                    if (message.body) {
+                        const ff = JSON.parse(message.body);
+                        self.bindData(ff);
+                    }
+                });
+            },
+            function(message) {
+                // check message for disconnect
+                console.log(message);
+            }
+        );
     }
 
     public bindData(fff): void {
