@@ -1,5 +1,6 @@
 package co.rxstack.mlstack.client.service;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import co.rxstack.mlstack.client.domain.Person;
@@ -10,14 +11,11 @@ import co.rxstack.mlstack.client.security.SecurityUtils;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.Optional;
 /**
  * Service Implementation for managing Person.
  */
@@ -73,7 +71,10 @@ public class PersonService {
     @Transactional(readOnly = true)
     public Page<Person> findAll(Pageable pageable) {
         log.debug("Request to get all People");
-        return personRepository.findAll(pageable);
+		return personRepository.findAll(pageable).map(person -> {
+			person.setFacesCount(backendService.getFaces(person.getId().intValue()).size());
+			return person;
+		});
     }
 
 

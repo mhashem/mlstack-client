@@ -3,10 +3,15 @@ package co.rxstack.mlstack.client.integrations.impl;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import co.rxstack.mlstack.client.integrations.IBackendService;
+import co.rxstack.mlstack.client.integrations.models.Face;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Files;
 import org.slf4j.Logger;
@@ -44,6 +49,20 @@ public class BackendService implements IBackendService {
 		this.discoveryClient = discoveryClient;
 	}
 
+	@Override
+	public List<Face> getFaces(int identity) {
+		log.info("Getting Faces for identity {}", identity);
+		return discoveryClient.getInstances(serviceName).stream().findFirst().map(serviceInstance -> {
+			Face[] faces = restTemplate.getForObject(UriComponentsBuilder.fromUri(serviceInstance.getUri())
+				.path("/mlstack/api/v1/faces/{identity}")
+				.buildAndExpand(identity)
+				.toUri(), Face[].class);
+
+			return Arrays.stream(faces).collect(Collectors.toList());
+		}).orElse(ImmutableList.of());
+	}
+
+	@Deprecated
 	@Override
 	public void saveImage() {
 		log.info("Sending new image notification");

@@ -113,6 +113,17 @@ jhipster:
 mlServiceName: ${ML_SERVICE_NAME}
 imageStorageDirectory: ${IMAGE_STORAGE_DIRECTORY}
 
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL}
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: true
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

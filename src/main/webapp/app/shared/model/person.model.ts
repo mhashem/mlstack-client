@@ -11,6 +11,7 @@ export interface IPerson {
     faceId1?: string;
     faceId2?: string;
     owner?: string;
+    facesCount?: number;
 }
 
 export class Person implements IPerson {
@@ -24,6 +25,7 @@ export class Person implements IPerson {
         public image?: any,
         public faceId1?: string,
         public faceId2?: string,
-        public owner?: string
+        public owner?: string,
+        public facesCount?: number
     ) {}
 }

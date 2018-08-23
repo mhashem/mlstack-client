@@ -1,11 +1,22 @@
 package co.rxstack.mlstack.client.domain;
 
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * A Person.
@@ -48,6 +59,11 @@ public class Person implements Serializable {
 
     @Column(name = "owner")
     private String owner;
+
+	@Transient
+	@JsonSerialize
+	@JsonDeserialize
+	private int facesCount = 0;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -180,7 +196,15 @@ public class Person implements Serializable {
     	return getId() + "#" + getName();
 	}
 
-    @Override
+	public int getFacesCount() {
+		return facesCount;
+	}
+
+	public void setFacesCount(int facesCount) {
+		this.facesCount = facesCount;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

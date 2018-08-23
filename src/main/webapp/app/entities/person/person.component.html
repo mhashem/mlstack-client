@@ -16,10 +16,11 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="address"><span>Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="address"><span>Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="info"><span>Info</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="dob"><span>Dob</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="dob"><span>Dob</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+			<th jhiSortBy="facesCount"><span>Indexed Faces</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="faceId1"><span>Face Id 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="faceId2"><span>Face Id 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="owner"><span>Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -30,15 +31,16 @@
             <tr *ngFor="let person of people ;trackBy: trackId">
                 <td><a [routerLink]="['/person', person.id, 'view' ]">{{person.id}}</a></td>
                 <td>{{person.name}}</td>
-                <td>{{person.address}}</td>
+                <!--<td>{{person.address}}</td>-->
                 <td>{{person.info}}</td>
-                <td>{{person.dob | date:'mediumDate'}}</td>
+                <!--<td>{{person.dob | date:'mediumDate'}}</td>-->
                 <td>
                     <a *ngIf="person.image" (click)="openFile(person.imageContentType, person.image)">
                         <img [src]="'data:' + person.imageContentType + ';base64,' + person.image" style="max-height: 30px;" alt="person image"/>
                     </a>
                     <span *ngIf="person.image">{{person.imageContentType}}, {{byteSize(person.image)}}</span>
                 </td>
+				<td>{{ person.facesCount }}</td>
                 <!--<td>{{person.faceId1}}</td>
                 <td>{{person.faceId2}}</td>-->
                 <td>{{person.owner}}</td>

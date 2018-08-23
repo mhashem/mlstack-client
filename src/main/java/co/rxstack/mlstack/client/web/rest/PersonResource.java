@@ -6,6 +6,7 @@ import co.rxstack.mlstack.client.service.PersonService;
 import co.rxstack.mlstack.client.web.rest.errors.BadRequestAlertException;
 import co.rxstack.mlstack.client.web.rest.util.HeaderUtil;
 import co.rxstack.mlstack.client.web.rest.util.PaginationUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,8 @@ public class PersonResource {
     private static final String ENTITY_NAME = "person";
 
     private final PersonService personService;
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     public PersonResource(PersonService personService) {
         this.personService = personService;
