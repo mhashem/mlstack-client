@@ -119,4 +119,15 @@ public class BackendService implements IBackendService {
 
 	}
 
+	@Override
+	public void deleteIdentity(Long id) {
+		log.info("Deleting identity {}", id);
+		discoveryClient.getInstances(serviceName).stream().findFirst().ifPresent(serviceInstance -> {
+			log.info("Found mlstack service instance running at {}", serviceInstance.getUri().toString());
+			restTemplate.delete(UriComponentsBuilder.fromUri(serviceInstance.getUri())
+				.path("/mlstack/api/v1/identity/{id}")
+				.buildAndExpand(id)
+				.toUri());
+		});
+	}
 }

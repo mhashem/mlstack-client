@@ -98,5 +98,6 @@ public class PersonService {
     public void delete(Long id) {
         log.debug("Request to delete Person : {}", id);
         personRepository.deleteById(id);
+        backendService.deleteIdentity(id);
     }
 }

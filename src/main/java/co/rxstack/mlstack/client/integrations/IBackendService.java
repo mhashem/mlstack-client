@@ -12,4 +12,6 @@ public interface IBackendService {
 
 	void uploadImage(String personName, byte[] imageBytes);
 
+	void deleteIdentity(Long id);
+
 }
