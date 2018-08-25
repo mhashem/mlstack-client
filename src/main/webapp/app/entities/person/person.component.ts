@@ -133,7 +133,6 @@ export class PersonComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.people = data;
-        console.log(data);
     }
 
     private onError(errorMessage: string) {
