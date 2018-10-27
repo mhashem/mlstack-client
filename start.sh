@@ -1,6 +1,4 @@
 #!/bin/sh
-source /home/deployments/apps/client-vars
-
 echo "********************************************************"
 echo "Starting the Eureka Server"
 echo "********************************************************"
