@@ -4,6 +4,7 @@ Description=ML-Stack-Client Service
 [Service]
 User=root
 WorkingDirectory=/home/deployments/mlstack-client
+EnvironmentFile=/home/deployments/apps/client-vars
 ExecStart=/bin/bash /home/deployments/mlstack-client/start.sh
 
 SuccessExitStatus=143
