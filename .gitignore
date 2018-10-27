@@ -113,7 +113,7 @@ Desktop.ini
 # Directories
 ######################
 /bin/
-/deploy/
+#/deploy/
 
 ######################
 # Logs
