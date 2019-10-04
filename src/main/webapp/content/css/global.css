@@ -236,3 +236,15 @@ ui bootstrap tweaks
     -webkit-transform: rotateY(180deg); /* Safari and Chrome */
     -moz-transform: rotateY(180deg); /* Firefox */
 }
+
+.tensorflow {
+    background-color: #ffb2d6;
+}
+
+.cognitive {
+    background-color: #9deaf9;
+}
+
+.aws {
+    background-color: #f4e297;
+}

@@ -108,4 +108,25 @@ export class FaceComponent implements OnInit {
         }
         return new Blob([u8arr], { type: mime });
     }
+
+    getClass(recognizer) {
+        if (recognizer === 'Tensorflow') return 'tensorflow';
+        else if (recognizer === 'Cognitive') return 'cognitive';
+        else if (recognizer === 'AWS Rekognition') return 'aws';
+        else return 'cognitive';
+    }
+
+    handleImage(files: FileList) {
+        console.log(files);
+        /*
+    const image = new Image();
+    image.src = URL.createObjectURL(files.item(0));
+    this.canvas.nativeElement.getContext('2d').drawImage(image, 0, 0, 450, 360);
+    this.selectedImage = image;
+*/
+        const file = files.item(0);
+        const reader = new FileReader();
+        reader.onload = e => (this.selectedImage = reader.result);
+        reader.readAsDataURL(file);
+    }
 }

@@ -7,6 +7,6 @@ export const HOME_ROUTE: Route = {
     component: HomeComponent,
     data: {
         authorities: [],
-        pageTitle: 'Welcome to FRP 0.1'
+        pageTitle: 'Home'
     }
 };

@@ -22,7 +22,8 @@
 				</div>
 
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="customFile">
+					<input type="file" class="custom-file-input" #file
+						   (change)="handleImage(file.files)">
 					<label class="custom-file-label" for="customFile">Choose file</label>
 				</div>
 
@@ -39,7 +40,7 @@
 						<span>Recognize</span></button>
 				</div>
 				<div class="card-body">
-					<img src="{{ selectedImage }}" class="img-thumbnail center-pill" />
+					<img src="{{ selectedImage }}" width="250" class="img-thumbnail center-pill" />
 				</div>
 			</div>
 		</div>
@@ -81,10 +82,10 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr *ngFor="let face of faces; index as i">
+		<tr *ngFor="let face of faces; index as i" class="{{ getClass(face.recognizer) }}">
 			<th scope="row">{{ i + 1 }}</th>
 			<td>{{ face.label }}</td>
-			<td>{{ face.confidence | number:'2.1-2'}}%</td>
+			<td style="font-style: italic">{{ face.confidence | number:'2.1-2'}}%</td>
 			<td>{{ face.recognizer }}</td>
 		</tr>
 		</tbody>

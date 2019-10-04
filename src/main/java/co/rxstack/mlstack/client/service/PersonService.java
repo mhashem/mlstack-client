@@ -56,8 +56,10 @@ public class PersonService {
 			boolean isSaved = storageService
 				.saveToDisk(String.valueOf(person.getId()), person.getImage(), person.getImageContentType());
 			if (isSaved) {
+				// todo push to retry queue
 				backendService.saveImage();
 			}
+			// todo else flag an error happened while saving to disk!
 		});
 		return savedPerson;
     }

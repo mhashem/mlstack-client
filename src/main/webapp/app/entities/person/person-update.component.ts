@@ -22,6 +22,7 @@ export class PersonUpdateComponent implements OnInit {
     public captures: Array<any>;
 
     localStream: any;
+    uploads: boolean;
 
     constructor(
         private dataUtils: JhiDataUtils,
@@ -74,6 +75,7 @@ export class PersonUpdateComponent implements OnInit {
         for (let i = 0; i < event.target.files.length; i++) {
             this.captures.push(event.target.files[i]);
         }
+        this.uploads = true;
     }
 
     clearInputImage(field: string, fieldContentType: string, idInput: string) {
@@ -105,7 +107,11 @@ export class PersonUpdateComponent implements OnInit {
         this.isSaving = false;
 
         if (this.captures.length > 0) {
-            this.captures.forEach(c => this.personService.uploadImage(res.body.id, res.body.name, c)); // this.dataURItoBlob(c)
+            if (!this.uploads) {
+                this.captures.forEach(c => this.personService.uploadImage(res.body.id, res.body.name, this.dataURItoBlob(c))); //
+            } else {
+                this.captures.forEach(c => this.personService.uploadImage(res.body.id, res.body.name, c)); //
+            }
         }
         // this.previousState();
     }
@@ -129,7 +135,20 @@ export class PersonUpdateComponent implements OnInit {
     }
     return new Blob([u8arr], {type:mime});
   }*/
-    private dataURItoBlob(dataURI) {
+
+    private dataURItoBlob(dataurl): Blob {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+    }
+
+    /*private dataURItoBlob(dataURI) {
         console.log(typeof dataURI);
 
         // convert base64 to raw binary data held in a string
@@ -156,5 +175,5 @@ export class PersonUpdateComponent implements OnInit {
         // write the ArrayBuffer to a blob, and you're done
         const blob = new Blob([ab], { type: mimeString });
         return blob;
-    }
+    }*/
 }
